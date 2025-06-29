@@ -15,34 +15,60 @@ Hasil akan dikirim otomatis ke Telegram.
 - Pengiriman laporan otomatis ke Telegram
 
 ## 🚀 Instalasi
+
+1. **Kloning Repositori:**
 ```bash
-git clone https://github.com/kamu/osint-telegram-bot.git
-cd osint-telegram-bot
-chmod +x installer.sh
-./installer.sh
+git clone https://github.com/enfuee/Osint-bot.git
+cd Osint-bot
+```
+
+2. **Instal Poetry (jika belum ada):**
+```bash
+curl -sSL https://install.python-poetry.org | python3 -
+export PATH="/home/ubuntu/.local/bin:$PATH"
+```
+
+3. **Instal Dependensi dengan Poetry:**
+```bash
+poetry install
 ```
 
 ## ⚙️ Konfigurasi
-Buat file `config.json` di folder utama:
+
+Buat file `config.json` di folder utama proyek dengan struktur berikut. Pastikan untuk mengganti placeholder dengan nilai yang sesuai dan mengatur jalur ke alat eksternal yang telah Anda instal.
+
 ```json
 {
-  "telegram_token": "TOKEN_BOT_KAMU",
-  "telegram_chat_id": "CHAT_ID_KAMU"
+  "telegram_token": "YOUR_TELEGRAM_BOT_TOKEN",
+  "telegram_chat_id": "YOUR_TELEGRAM_CHAT_ID",
+  "tool_paths": {
+    "sherlock": "/path/to/your/sherlock/directory",
+    "maigret": "/path/to/your/maigret/directory",
+    "theharvester": "/path/to/your/theharvester/directory",
+    "spiderfoot": "/path/to/your/spiderfoot/directory"
+  }
 }
 ```
 
+**Catatan:** Pastikan jalur yang Anda berikan di `tool_paths` adalah direktori tempat skrip utama alat (misalnya, `sherlock.py`, `maigret.py`, `theHarvester.py`, `sf.py`) berada.
+
 ## ▶️ Penggunaan
+
+Jalankan bot menggunakan Poetry. Anda dapat menentukan target (username atau domain), mode scan, dan alat spesifik yang ingin dijalankan.
+
 ```bash
-python3 main.py --target naraditya --mode username
-python3 main.py --target diskominfo.go.id --mode domain
-python3 main.py --target naraditya --mode all
+poetry run python main.py --target naraditya --mode username
+poetry run python main.py --target diskominfo.go.id --mode domain
+poetry run python main.py --target naraditya --mode all
+poetry run python main.py --target naraditya --mode username --tools sherlock maigret
+poetry run python main.py --target diskominfo.go.id --mode domain --tools theharvester
 ```
 
 ## 🗂 Struktur Project
 ```
 osint-telegram-bot/
-├── installer.sh
-├── requirements.txt
+├── poetry.lock
+├── pyproject.toml
 ├── config.json
 ├── main.py
 ├── modules/
@@ -57,3 +83,4 @@ osint-telegram-bot/
 
 ## 📤 Output
 Semua laporan akan disimpan di folder `reports/` dan dikirim ke Telegram bot kamu.
+

@@ -1,0 +1,9 @@
+{
+    "tool_paths": {
+        "sherlock": "/opt/sherlock",
+        "maigret": "/opt/maigret",
+        "theharvester": "/opt/theharvester",
+        "spiderfoot": "/opt/spiderfoot"
+    }
+}
+
